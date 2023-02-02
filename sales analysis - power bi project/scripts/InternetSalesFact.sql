@@ -1,0 +1,31 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT  [ProductKey]
+      ,[OrderDateKey]
+      --,[DueDateKey]
+      --,[ShipDateKey]
+      ,[CustomerKey]
+      --,[PromotionKey]
+      --,[CurrencyKey]
+      --,[SalesTerritoryKey]
+      --,[SalesOrderNumber]
+     -- ,[SalesOrderLineNumber]
+      --,[RevisionNumber]
+      --,[OrderQuantity]
+      ,[UnitPrice]
+      --,[ExtendedAmount]
+      --,[UnitPriceDiscountPct]
+      --,[DiscountAmount]
+      --,[ProductStandardCost]
+      --,[TotalProductCost]
+      ,[SalesAmount]
+      --[TaxAmt]
+      --,[Freight]
+      --,[CarrierTrackingNumber]
+      --,[CustomerPONumber]
+      --,[OrderDate]
+      --,[DueDate]
+      --,[ShipDate]
+	  ,Prom.EnglishPromotionType
+  FROM [AdventureWorksDW2019].[dbo].[FactInternetSales] Sale
+  LEFT JOIN dbo.DimPromotion as Prom ON Prom.PromotionKey = Sale.PromotionKey
+  WHERE LEFT (OrderDateKey,4) >= YEAR(GETDATE())-5 -- Making sure that I am only getting data after 2018
